@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FileZipTest {
     private ClassLoader cl = FileZipTest.class.getClassLoader();
 
-    @DisplayName("Проверка zip архива")
+    @DisplayName("Проверка pdf файла")
     @Test
-    void zipParseTest() throws Exception {
+    void pdfParseTest() throws Exception {
         try (InputStream is = cl.getResourceAsStream("test.zip");
              ZipInputStream zs = new ZipInputStream(is)) {
             ZipEntry entry;
@@ -32,14 +32,36 @@ public class FileZipTest {
                     assertTrue(pdf.text.startsWith("MDR-10RBT"));
 
                 }
+            }
+        }
+    }
+
+    @DisplayName("Проверка cvs файла")
+    @Test
+    void csvParseTest() throws Exception {
+        try (InputStream is = cl.getResourceAsStream("test.zip");
+             ZipInputStream zs = new ZipInputStream(is)) {
+            ZipEntry entry;
+            while ((entry = zs.getNextEntry()) != null) {
+
 
                 if (entry.getName().equals("Auto.csv")) {
 
                     CSVReader csvReader = new CSVReader(new InputStreamReader(zs));
                     List<String[]> content = csvReader.readAll();
                     assertArrayEquals(new String[]{"Audi", "A7", "230"}, content.get(2));
-
                 }
+            }
+        }
+    }
+
+    @DisplayName("Проверка xlsx файла")
+    @Test
+    void xlsxParseTest() throws Exception {
+        try (InputStream is = cl.getResourceAsStream("test.zip");
+             ZipInputStream zs = new ZipInputStream(is)) {
+            ZipEntry entry;
+            while ((entry = zs.getNextEntry()) != null) {
 
                 if (entry.getName().equals("telefon-sprav.xlsx")) {
 
@@ -54,3 +76,4 @@ public class FileZipTest {
         }
     }
 }
+
