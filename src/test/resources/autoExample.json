@@ -1,0 +1,15 @@
+{
+  "id": 10005,
+  "brand": "Lada",
+  "model": "Vesta",
+  "size": {
+    "length": 4580,
+    "width": 1750,
+    "height": 1640
+  },
+  "option": [
+    "Navigation",
+    "Climatic"
+  ],
+  "testDrive": true
+}
